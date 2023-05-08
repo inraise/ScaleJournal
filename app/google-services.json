@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "91405806826",
+    "project_id": "octal-news",
+    "storage_bucket": "octal-news.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:91405806826:android:c5097eea165bb850f7fb93",
+        "android_client_info": {
+          "package_name": "com.example.octalnews"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "91405806826-008os6p41fdqeu2b7kjt6s1ohfli66cc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2iN7B0eeuhELXJ_HB2qhw9pJsI8BYM3c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "91405806826-008os6p41fdqeu2b7kjt6s1ohfli66cc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
