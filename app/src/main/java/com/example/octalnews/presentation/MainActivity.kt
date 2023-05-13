@@ -22,13 +22,13 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-    private val colorImageViewModel: ColorImageViewModel by viewModels()
     private val weatherViewModel: WeatherViewModel by viewModels()
     private val locationViewModel: LocationViewModel by viewModels()
-    private lateinit var navController: NavHostController
-    private lateinit var auth: FirebaseAuth
     private val newsViewModel: NewsViewModel by viewModels()
     private val ratesViewModel: RatesViewModel by viewModels()
+
+    private lateinit var navController: NavHostController
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,7 +45,6 @@ class MainActivity : ComponentActivity() {
                 systemUiController.setNavigationBarColor(
                     color = MaterialTheme.colors.background
                 )
-                colorImageViewModel.getIcon(MaterialTheme.colors.background)
                 newsViewModel.getNews("", this)
                 ratesViewModel.getRates()
 
@@ -53,7 +52,6 @@ class MainActivity : ComponentActivity() {
 
                 SetupNavGraph(
                     context = this,
-                    colorImageViewModel = colorImageViewModel,
                     navController = navController,
                     auth,
                     newsViewModel,

@@ -1,4 +1,4 @@
-package com.example.octalnews.presentation.digestelements
+package com.example.octalnews.presentation.items.digestelements
 
 import android.app.Activity
 import androidx.compose.foundation.layout.*

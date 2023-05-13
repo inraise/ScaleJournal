@@ -26,9 +26,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.octalnews.R
-import com.example.octalnews.presentation.digestelements.DigestDigestScreen
-import com.example.octalnews.presentation.digestelements.ProfileScreen
-import com.example.octalnews.presentation.digestelements.SearchScreen
+import com.example.octalnews.presentation.items.digestelements.DigestDigestScreen
+import com.example.octalnews.presentation.items.digestelements.ProfileScreen
+import com.example.octalnews.presentation.items.digestelements.SearchScreen
 import com.example.octalnews.presentation.screen.viewmodels.LocationViewModel
 import com.example.octalnews.presentation.screen.viewmodels.NewsViewModel
 import com.example.octalnews.presentation.screen.viewmodels.RatesViewModel

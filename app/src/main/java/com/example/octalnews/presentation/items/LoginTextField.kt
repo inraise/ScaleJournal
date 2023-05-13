@@ -15,6 +15,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.octalnews.presentation.theme.fontInter
@@ -53,17 +56,22 @@ fun loginTextField(text: String, placeholder: String): String {
         ),
         keyboardOptions = KeyboardOptions(
             imeAction = if ((Pattern.matches(
-                    "^[A-Za-z0-9+_.-]+@[a-z]+[.]+[a-z]+[a-z]",
+                    "^(?=.{1,64}@)[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)" +
+                            "*@[^-][a-zA-Z0-9_-]+(\\.[a-zA-Z0-9]+)*(\\.[a-z]{2,3})$",
                     textR
                 )
                         && placeholder != "Enter your password") || (
                         placeholder == "Enter your password" &&
                                 textR.length >= 8
                         )
-            ) ImeAction.Done else ImeAction.None
+            ) ImeAction.Done else ImeAction.None,
+            keyboardType = if (placeholder == "Enter your password") KeyboardType.Password
+            else KeyboardType.Email
         ),
         keyboardActions = KeyboardActions(
-            onDone = { keyboardController?.hide() })
+            onDone = { keyboardController?.hide() }),
+        visualTransformation = if (placeholder == "Enter your password")
+            PasswordVisualTransformation() else VisualTransformation.None,
     )
 
     return textR

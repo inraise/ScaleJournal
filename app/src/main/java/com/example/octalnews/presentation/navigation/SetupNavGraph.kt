@@ -15,7 +15,6 @@ import com.google.firebase.auth.FirebaseAuth
 @Composable
 fun SetupNavGraph(
     context: Activity,
-    colorImageViewModel: ColorImageViewModel,
     navController: NavHostController,
     auth: FirebaseAuth,
     newsViewModel: NewsViewModel,

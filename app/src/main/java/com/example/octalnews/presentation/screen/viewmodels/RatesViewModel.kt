@@ -6,16 +6,19 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.octalnews.domain.model.retrofit.rates.RatesModel
-import com.example.octalnews.data.remote.RatesRetrofitInterface
+import com.example.octalnews.domain.usecase.rates.RatesUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class RatesViewModel : ViewModel() {
+@HiltViewModel
+class RatesViewModel @Inject constructor(val ratesUseCase: RatesUseCase) : ViewModel() {
     var ratesData by mutableStateOf(RatesModel())
 
     fun getRates() {
         viewModelScope.launch {
             try {
-                ratesData = RatesRetrofitInterface.rates_api_service.getRates()
+                ratesData = ratesUseCase.invoke()
             } catch (_: java.lang.Exception) {
             }
         }

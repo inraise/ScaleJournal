@@ -1,4 +1,4 @@
-package com.example.octalnews.domain.model.retrofit
+package com.example.octalnews.domain.model.retrofit.news
 
 data class Article(
     val author: String = "",

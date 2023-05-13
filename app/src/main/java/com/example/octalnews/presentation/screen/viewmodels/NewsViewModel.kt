@@ -7,11 +7,18 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.octalnews.data.ReadData
-import com.example.octalnews.domain.model.retrofit.NewsModel
-import com.example.octalnews.data.remote.RetrofitInterface
+import com.example.octalnews.domain.model.retrofit.news.NewsModel
+import com.example.octalnews.domain.usecase.news.HeadlinesNewsUseCase
+import com.example.octalnews.domain.usecase.news.SearchedNewsUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class NewsViewModel : ViewModel() {
+@HiltViewModel
+class NewsViewModel @Inject constructor(
+    private val headlinesNewsUseCase: HeadlinesNewsUseCase,
+    private val searchedNewsUseCase: SearchedNewsUseCase
+) : ViewModel() {
     var allNews by mutableStateOf(NewsModel())
     var businessNews by mutableStateOf(NewsModel())
     var scienceNews by mutableStateOf(NewsModel())
@@ -23,27 +30,33 @@ class NewsViewModel : ViewModel() {
     fun getNews(category: String, context: Activity) {
         viewModelScope.launch {
             try {
-                allNews = RetrofitInterface.api_service.getHeadlinesNews(
-                    category = category,
-                    country = ReadData("country", context)
+
+                allNews = headlinesNewsUseCase.invoke(
+                    value2 = category,
+                    value1 = ReadData("country", context)
                 )
-                businessNews = RetrofitInterface.api_service.getHeadlinesNews(
-                    category = "business",
-                    country = ReadData("country", context)
+
+                businessNews = headlinesNewsUseCase.invoke(
+                    value2 = "business",
+                    value1 = ReadData("country", context)
                 )
-                scienceNews = RetrofitInterface.api_service.getHeadlinesNews(
-                    category = "science",
-                    country = ReadData("country", context)
+
+                scienceNews = headlinesNewsUseCase.invoke(
+                    value2 = "science",
+                    value1 = ReadData("country", context)
                 )
+
                 technologyNews =
-                    RetrofitInterface.api_service.getHeadlinesNews(
-                        category = "technology",
-                        country = ReadData("country", context)
+                    headlinesNewsUseCase.invoke(
+                        value2 = "technology",
+                        value1 = ReadData("country", context)
                     )
-                healthNews = RetrofitInterface.api_service.getHeadlinesNews(
-                    category = "health",
-                    country = ReadData("country", context)
+
+                healthNews = headlinesNewsUseCase.invoke(
+                    value2 = "health",
+                    value1 = ReadData("country", context)
                 )
+
             } catch (_: java.lang.Exception) {
             }
         }
@@ -52,9 +65,9 @@ class NewsViewModel : ViewModel() {
     fun getSearchedNews(searchText: String, context: Activity) {
         viewModelScope.launch {
             try {
-                searchedNews = RetrofitInterface.api_service.getSearchedNews(
-                    q = searchText,
-                    country = ReadData("lang", context)
+                searchedNews = searchedNewsUseCase.invoke(
+                    value2 = searchText,
+                    value1 = ReadData("lang", context)
                 )
             } catch (_: Exception) {
             }

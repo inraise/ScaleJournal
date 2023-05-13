@@ -1,6 +1,7 @@
 package com.example.octalnews.presentation.items
 
 import android.app.Activity
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -24,7 +25,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.octalnews.R
 import com.example.octalnews.domain.model.Screens
-import com.example.octalnews.domain.model.retrofit.Article
+import com.example.octalnews.domain.model.retrofit.news.Article
 import com.example.octalnews.presentation.theme.fontInter
 import com.example.octalnews.presentation.theme.fontStr
 import com.example.octalnews.presentation.screen.viewmodels.LocationViewModel

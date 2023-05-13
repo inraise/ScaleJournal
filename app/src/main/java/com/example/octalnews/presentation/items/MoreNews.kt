@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import com.example.octalnews.domain.model.Screens
-import com.example.octalnews.domain.model.retrofit.Article
+import com.example.octalnews.domain.model.retrofit.news.Article
 import com.example.octalnews.presentation.theme.fontInter
 
 @Composable
