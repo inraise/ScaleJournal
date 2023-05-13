@@ -5,6 +5,7 @@ import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
@@ -27,6 +28,7 @@ import com.example.octalnews.presentation.items.loginTextField
 import com.example.octalnews.presentation.theme.fontInter
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.google.firebase.auth.FirebaseAuth
+import java.util.regex.Pattern
 
 @Composable
 fun LoginScreen(
@@ -106,7 +108,50 @@ fun LoginScreen(
 
         password = loginTextField(password, "Enter your password")
 
-        Spacer(modifier = Modifier.padding(top = 40.dp))
+        Spacer(modifier = Modifier.padding(top = 10.dp))
+
+        Text(
+            modifier = Modifier
+                .fillMaxWidth()
+                .clickable {
+                    if (loginEmail.isNotEmpty() && Pattern.matches(
+                            "^(?=.{1,64}@)[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)" +
+                                    "*@[^-][a-zA-Z0-9_-]+(\\.[a-zA-Z0-9]+)*(\\.[a-z]{2,3})$",
+                            loginEmail
+                        )
+                    ) {
+                        auth
+                            .sendPasswordResetEmail(loginEmail)
+                            .addOnCompleteListener { task ->
+                                if (task.isSuccessful) {
+                                    Toast
+                                        .makeText(
+                                            context,
+                                            "We've sent an email to you",
+                                            Toast.LENGTH_SHORT
+                                        )
+                                        .show()
+                                }
+                            }
+                    } else {
+                        Toast
+                            .makeText(
+                                context,
+                                "Email is empty or not suitable",
+                                Toast.LENGTH_SHORT
+                            )
+                            .show()
+                    }
+                },
+            text = "Reset password",
+            color = Color(0xFF303030),
+            fontWeight = FontWeight.W700,
+            fontSize = 15.sp,
+            fontFamily = fontInter,
+            textAlign = TextAlign.Start
+        )
+
+        Spacer(modifier = Modifier.padding(top = 30.dp))
 
         Button(
             modifier = Modifier
